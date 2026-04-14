@@ -20,10 +20,8 @@
 
     <!-- ✅ PROPERTIES -->
     <properties>
-        <java.version>21</java.version>
-        <spring-cloud.version>2025.1.0</spring-cloud.version>
-        <org.mapstruct.version>1.6.3</org.mapstruct.version>
-        <lombok.version>1.18.34</lombok.version>
+        <java.version>17</java.version>
+		<spring-cloud.version>2025.1.0</spring-cloud.version>
     </properties>
 
     <!-- ✅ DEPENDENCIES -->
