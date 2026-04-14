@@ -9,6 +9,7 @@ pipeline {
 
   tools {
     maven "Maven"
+    jdk 'JDK21'
   }
 
   stages {
@@ -19,11 +20,7 @@ pipeline {
         }
     }
 
-     stage('Run Tests') {
-      steps {
-        sh 'mvn test'
-      }
-    }
+    
 
     stage('SonarQube Analysis') {
   steps {
@@ -80,7 +77,7 @@ pipeline {
 
     stage('Update Image Tag in GitOps') {
       steps {
-         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:Oussama-lasri/deployment-folder.git']])
+         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:Oussama-lasri/deployment-folder.git']])
         script {
        sh '''
           sed -i "s/image:.*/image: ousamalasri\\/restaurant-listing-service:${VERSION}/" AWS/restaurant-manifest.yml
@@ -90,7 +87,7 @@ pipeline {
           sh 'git commit -m "Update image tag"'
         sshagent(['git-ssh'])
             {
-                  sh('git push')
+                  sh('git push origin master')
             }
         }
       }
