@@ -57,17 +57,7 @@ pipeline {
         } 
 
 
-      stage('Docker Build and Push') {
-		
-      steps {
-		script {
-			echo "dokcer hube $DOCKERHUB_CREDENTIALS"
-		}
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh 'docker build -t ousamalasri/restaurant-listing-service:${VERSION} .'
-          sh 'docker push ousamalasri/restaurant-listing-service:${VERSION}'
-      }
-    } 
+     
 
 
      stage('Cleanup Workspace') {
